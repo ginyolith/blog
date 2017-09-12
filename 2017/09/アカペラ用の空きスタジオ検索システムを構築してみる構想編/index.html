@@ -221,7 +221,7 @@
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2017-09-13T02:05:39&#43;09:00">
+      <time itemprop="datePublished" datetime="2017-09-13T01:45:15&#43;09:00">
         
   九月 13, 2017
 
@@ -245,197 +245,81 @@
             <div class="main-content-wrap">
               <p></p>
 
-<h2 id="目次">目次</h2>
+<h2 id="経緯">経緯</h2>
 
-<ol>
-<li>要件詰め</li>
-<li>設計</li>
-</ol>
+<p>こんにちは。ぎーにょです。</p>
 
-<h2 id="要件詰め">要件詰め</h2>
+<p>私は趣味でアカペラをしています。こんな感じの、声だけで演奏する音楽です。
+<iframe src="https://www.youtube.com/embed/8QDt_v0BZ8M" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+↑私が所属してる、<a href="https://twitter.com/hamu_nama_usui">生ハム、それは薄い。</a>というバンドです。よかったらフォローしてください！
+<a href="https://twitter.com/hamu_nama_usui" class="twitter-follow-button" data-show-count="false">Follow @hamu_nama_usui</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 
-<p>前回の構想だと、ユースケースの想定が足りなかったので、追加で考えてみました。</p>
+<p>メンバーで集まって練習のする時の場所として、<a href="http://bassontop.tokyo.jp/a-cappella/" target="_blank" rel="noopener">ベースオントップ高田馬場店</a>によくお世話になっているんですが、予約のシステムがイケてないですよね…
+特に、予約可能な時間を目視で確認しなければいけないのがたまらなく面倒くさいんです。</p>
 
-<h3 id="ユースケース">ユースケース</h3>
+<p><img class="alignnone size-large wp-image-37" src="http://blog.ginyolith.com/wp-content/uploads/2017/08/スクリーンショット-2017-08-30-0.14.50-1024x630.png" alt="" width="1024" height="630" /></p>
 
-<ol>
-<li>○月✗日の13:00 ~ 16:00の間でスタジオ空いてないかな？</li>
-<li>出来るだけ安いスタジオが良い！</li>
-<li>ダンススタジオとアカペラスタジオ一括で空きスタジオを検索したい。</li>
-<li>12:00 ~ 17:00の間で3時間やりたい</li>
-</ol>
+<p>HTMLのテーブルで空き時間を目視(T_T)
+時間と部屋のセルからリンクに飛べない(T_T)（これは、恐らくWordPressでガチャガチャして作ってるので仕方ない部分もありそうですが）</p>
 
-<p>2はスタジオのマスターに情報を追加すればOKそう。
-3は検索対象のスタジオ増やすだけでOK</p>
+<p>そこで、アカペラプレイヤー（スタジオを使う人）目線に立った、簡単に予約が出来るシステムを作ってみようかと思います。</p>
 
-<p>苦戦しそうなのは、1と4ですね。必須要件ではありますが、こういう予約ってどういう設計すればいいのかよくわからない…。</p>
+<h2 id="システム要件">システム要件</h2>
 
-<h2 id="要件">要件</h2>
-
-<p>上記をもとに、下記を要件として設定しました。
-* web上から日付・時間範囲で、開いているスタジオを検索出来る。
-* 例えば、13:00 ~ 16:00で練習がしたくて、スタジオの空きが下記表のような形の場合、13:00 ~ 16:00で部屋を使えるBのみが検索にHITする。</p>
-
-<table>
-<thead>
-<tr>
-<th>部屋名</th>
-<th>時間</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>A</td>
-<td>10:00 ~ 15:00</td>
-</tr>
-
-<tr>
-<td>B</td>
-<td>12:00 ~ 17:00</td>
-</tr>
-
-<tr>
-<td>C</td>
-<td>15:00 ~ 17:00</td>
-</tr>
-</tbody>
-</table>
+<h3 id="必須要件">必須要件</h3>
 
 <ul>
-<li>第一フェーズはアカペラスタジオBassOnTop高田馬場店と、同店ダンススタジオを検索対象とする。</li>
-<li>範囲の追加はリリースしてからいくらでも出来ると思うので。</li>
-<li>レスポンシブデザイン</li>
-<li>検索にヒットした明細をクリックすると、そのスタジオの予約画面へと繊維する</li>
-<li>予約情報のオートフィルなどのサポートはスコープ外とする</li>
+<li>Bass on top高田馬場店の空きスタジオを、下記項目で検索出来る。
+
+<ul>
+<li>空き時間</li>
+<li>部屋番号</li>
+<li>部屋の大きさ</li>
+<li>料金</li>
+</ul></li>
+<li>将来的に予約スケジュールを公開している様々なサイトから、下記の項目で検索可能
+
+<ul>
+<li>空き時間</li>
+<li>部屋番号</li>
+<li>部屋の大きさ</li>
+<li>料金</li>
+<li>場所</li>
+<li>スタジオ単位</li>
+<li>マイクあり/なし</li>
+</ul></li>
 </ul>
 
-<h2 id="設計">設計</h2>
-
-<h3 id="技術選定">技術選定</h3>
-
-<p>ひとまず、手軽にリリースしたい + djangoの勉強をしたかったので、下記のようなウルトラシンプル構成にしました。</p>
-
-<table>
-<thead>
-<tr>
-<th>項目</th>
-<th>内容</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>フロント周り　</td>
-<td>bootstrap4</td>
-</tr>
-
-<tr>
-<td>アプリ</td>
-<td>django</td>
-</tr>
-
-<tr>
-<td>スクレイピング</td>
-<td>BeautifulSoup4, scrapelib (pythonのライブラリ)</td>
-</tr>
-
-<tr>
-<td>DB</td>
-<td>sqlite3</td>
-</tr>
-
-<tr>
-<td>webサーバー</td>
-<td>nginx</td>
-</tr>
-
-<tr>
-<td>環境</td>
-<td>amazon lightsail (nginx)</td>
-</tr>
-
-<tr>
-<td>エディタ</td>
-<td>PyCharm</td>
-</tr>
-
-<tr>
-<td>ソースコード管理</td>
-<td>bitbucket</td>
-</tr>
-</tbody>
-</table>
-
-<p>環境はheroku使えばいいやんとか色々あると思いますが、このブログもlightsailで立ち上げたのでひとまず慣れてるほうを取りました。
-ソースコードはgithubで公開してポートフォリオ化したいなとも考えたのですが、一応本番運用する予定のサービスのため、セキュリティ関連で考える事が増えてしまってリリースが遅れてしまうことを懸念したため、プライベートリポジトリを持てるbitbucketを選定しました。
-スクレイピングで空きスタジオ情報をWebで公開しているページから、情報を取得する形になりそうです。
-バッチを作ったらcronで回せばいいかなと。</p>
-
-<h3 id="db設計">DB設計</h3>
-
-<p>ざっくりこんな感じの設計に
-スタジオマスタ</p>
+<h3 id="必要な画面">必要な画面</h3>
 
 <ul>
-<li>スタジオID(Primary Key)</li>
-<li>スタジオ名</li>
-<li>url</li>
+<li>検索一覧</li>
+<li>詳細画面はなし。明細をクリックしたら直接予約画面に遷移</li>
 </ul>
 
-<p>部屋マスタ</p>
+<h2 id="意識したこと-これからする事">意識したこと/これからする事</h2>
 
 <ul>
-<li>部屋ID(Primary Key)</li>
-<li>スタジオID（Foreign Key)</li>
-<li>部屋名</li>
-</ul>
-
-<p>利用可能スタジオ</p>
+<li>出来る限り機能を削る。スモールスタートに
 
 <ul>
-<li>部屋ID(Foreign Key)</li>
-<li>利用可能時間From（datetime型）</li>
-<li>利用可能時間To（datetime型）</li>
-</ul>
-
-<p>他にも実装上必要なカラムがいくつかあるかと思いますが、根幹はこんなもんかと。
-利用可能時間は、システム的には</p>
-
-<pre><code class="language-sql">select
-*
-from
-book_studio
-where
-time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
-</code></pre>
-
-<p>みたいに検索かけると思うので、datetimeに設定します。</p>
-
-<h3 id="画面設計">画面設計</h3>
-
-<p>1画面で、単純に検索 + 明細でいきます。
-仕事でやったシステムで実装が簡単だったから、djangoでも行けるはず（と信じたい）
-検索項目は、下記があれば十分かな？</p>
+<li>一度、業務で作ってるレベルの規模の大きいシステム一人で作ろうとして、挫折しかけたので…</li>
+</ul></li>
+<li>ITに疎い、面倒くさがりなユーザーの気持ちになって、出来るだけシンプルにする
 
 <ul>
-<li>スタジオ名</li>
-<li>練習時刻From</li>
-<li>練習時刻To</li>
-<li>練習時間</li>
-</ul>
-
-<p>明細の項目は下記で必要最低限の情報は揃うはず。</p>
-
-<ul>
-<li>部屋名</li>
-<li>スタジオ名</li>
-<li>予約可能時間範囲</li>
+<li>なので、まずは1画面だけどのかなりシンプルなアプリに</li>
+</ul></li>
 </ul>
 
 <h2 id="次回は">次回は</h2>
 
-<p>スクレイピング設計&amp;実装について書いていきたいと思います。</p>
+<ul>
+<li>要件定義をもう少し詰める</li>
+<li>DB設計、画面設計を進める</li>
+</ul>
+
+<p>上記らへんを記事にしたいと思います。</p>
               
             </div>
           </div>
@@ -459,7 +343,7 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">次</span>
@@ -467,7 +351,7 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる①　構想編">
+                <a class="post-action-btn btn btn--disabled">
               
                 <span class="hide-xs hide-sm text-small icon-mr">前</span>
                 <i class="fa fa-angle-right"></i>
@@ -543,7 +427,7 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">次</span>
@@ -551,7 +435,7 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる①　構想編">
+                <a class="post-action-btn btn btn--disabled">
               
                 <span class="hide-xs hide-sm text-small icon-mr">前</span>
                 <i class="fa fa-angle-right"></i>
@@ -683,8 +567,8 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/">
-                <h3 class="media-heading">アカペラ用の空きスタジオ検索システムを構築してみる①　構想編</h3>
+              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+                <h3 class="media-heading">アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -709,60 +593,6 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/hidden-social-section-showcase/">
-                <h3 class="media-heading">Hidden social section showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the social section is hidden.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/hidden-tag-section-showcase/">
-                <h3 class="media-heading">Hidden tag section showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the tag section is hidden.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/hidden-pagination-showcase/">
-                <h3 class="media-heading">Hidden pagination showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the pagination is hidden.
-</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -792,7 +622,7 @@ time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         6 posts found
+         3 posts found
       </p>
     </div>
   </div>

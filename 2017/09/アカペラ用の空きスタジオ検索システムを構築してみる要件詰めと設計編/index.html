@@ -22,26 +22,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.27 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Hidden social section showcase</title>
+    <title>アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編</title>
     <meta name="author" content="ぎーにょ/ginyolith">
-    <meta name="keywords" content=", it, programming, プログラミング, a cappela, アカペラ, system, システムエンジニア">
+    <meta name="keywords" content="tech, a capella, it, programming, プログラミング, a cappela, アカペラ, system, システムエンジニア">
 
     <link rel="icon" href="https://ginyolith.github.io/blog/favicon.png">
     
 
     
-    <meta name="description" content="This post is used to show how a site looks if the social section is hidden.
-">
-    <meta property="og:description" content="This post is used to show how a site looks if the social section is hidden.
-">
+    <meta name="description" content="">
+    <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Hidden social section showcase">
-    <meta property="og:url" content="/2014/08/hidden-social-section-showcase/">
+    <meta property="og:title" content="アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編">
+    <meta property="og:url" content="/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
     <meta property="og:site_name" content="ぎにょろぐ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="ぎにょろぐ">
-    <meta name="twitter:description" content="This post is used to show how a site looks if the social section is hidden.
-">
+    <meta name="twitter:description" content="">
     
       <meta name="twitter:creator" content="@ginyolith">
     
@@ -54,8 +51,6 @@
       <meta property="og:image" content="//www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=640">
     
 
-    
-      <meta property="og:image" content="//d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city-750.jpg">
     
     
     
@@ -220,15 +215,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Hidden social section showcase
+      アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2014-08-17T00:00:00Z">
+      <time itemprop="datePublished" datetime="2017-09-13T02:05:39&#43;09:00">
         
-  八月 17, 2014
+  九月 13, 2017
 
       </time>
     
@@ -237,9 +232,7 @@
   
     <span>カテゴリー</span>
     
-      <a class="category-link" href="https://ginyolith.github.io/blog/categories/tranquilpeak">tranquilpeak</a>, 
-    
-      <a class="category-link" href="https://ginyolith.github.io/blog/categories/features">features</a>
+      <a class="category-link" href="https://ginyolith.github.io/blog/categories/tech">tech</a>
     
   
 
@@ -250,10 +243,199 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>This post is used to show how a site looks if the social section is hidden.
-</p>
+              <p></p>
 
-<p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+<h2 id="目次">目次</h2>
+
+<ol>
+<li>要件詰め</li>
+<li>設計</li>
+</ol>
+
+<h2 id="要件詰め">要件詰め</h2>
+
+<p>前回の構想だと、ユースケースの想定が足りなかったので、追加で考えてみました。</p>
+
+<h3 id="ユースケース">ユースケース</h3>
+
+<ol>
+<li>○月✗日の13:00 ~ 16:00の間でスタジオ空いてないかな？</li>
+<li>出来るだけ安いスタジオが良い！</li>
+<li>ダンススタジオとアカペラスタジオ一括で空きスタジオを検索したい。</li>
+<li>12:00 ~ 17:00の間で3時間やりたい</li>
+</ol>
+
+<p>2はスタジオのマスターに情報を追加すればOKそう。
+3は検索対象のスタジオ増やすだけでOK</p>
+
+<p>苦戦しそうなのは、1と4ですね。必須要件ではありますが、こういう予約ってどういう設計すればいいのかよくわからない…。</p>
+
+<h2 id="要件">要件</h2>
+
+<p>上記をもとに、下記を要件として設定しました。
+* web上から日付・時間範囲で、開いているスタジオを検索出来る。
+* 例えば、13:00 ~ 16:00で練習がしたくて、スタジオの空きが下記表のような形の場合、13:00 ~ 16:00で部屋を使えるBのみが検索にHITする。</p>
+
+<table>
+<thead>
+<tr>
+<th>部屋名</th>
+<th>時間</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>A</td>
+<td>10:00 ~ 15:00</td>
+</tr>
+
+<tr>
+<td>B</td>
+<td>12:00 ~ 17:00</td>
+</tr>
+
+<tr>
+<td>C</td>
+<td>15:00 ~ 17:00</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>第一フェーズはアカペラスタジオBassOnTop高田馬場店と、同店ダンススタジオを検索対象とする。</li>
+<li>範囲の追加はリリースしてからいくらでも出来ると思うので。</li>
+<li>レスポンシブデザイン</li>
+<li>検索にヒットした明細をクリックすると、そのスタジオの予約画面へと繊維する</li>
+<li>予約情報のオートフィルなどのサポートはスコープ外とする</li>
+</ul>
+
+<h2 id="設計">設計</h2>
+
+<h3 id="技術選定">技術選定</h3>
+
+<p>ひとまず、手軽にリリースしたい + djangoの勉強をしたかったので、下記のようなウルトラシンプル構成にしました。</p>
+
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>フロント周り　</td>
+<td>bootstrap4</td>
+</tr>
+
+<tr>
+<td>アプリ</td>
+<td>django</td>
+</tr>
+
+<tr>
+<td>スクレイピング</td>
+<td>BeautifulSoup4, scrapelib (pythonのライブラリ)</td>
+</tr>
+
+<tr>
+<td>DB</td>
+<td>sqlite3</td>
+</tr>
+
+<tr>
+<td>webサーバー</td>
+<td>nginx</td>
+</tr>
+
+<tr>
+<td>環境</td>
+<td>amazon lightsail (nginx)</td>
+</tr>
+
+<tr>
+<td>エディタ</td>
+<td>PyCharm</td>
+</tr>
+
+<tr>
+<td>ソースコード管理</td>
+<td>bitbucket</td>
+</tr>
+</tbody>
+</table>
+
+<p>環境はheroku使えばいいやんとか色々あると思いますが、このブログもlightsailで立ち上げたのでひとまず慣れてるほうを取りました。
+ソースコードはgithubで公開してポートフォリオ化したいなとも考えたのですが、一応本番運用する予定のサービスのため、セキュリティ関連で考える事が増えてしまってリリースが遅れてしまうことを懸念したため、プライベートリポジトリを持てるbitbucketを選定しました。
+スクレイピングで空きスタジオ情報をWebで公開しているページから、情報を取得する形になりそうです。
+バッチを作ったらcronで回せばいいかなと。</p>
+
+<h3 id="db設計">DB設計</h3>
+
+<p>ざっくりこんな感じの設計に
+スタジオマスタ</p>
+
+<ul>
+<li>スタジオID(Primary Key)</li>
+<li>スタジオ名</li>
+<li>url</li>
+</ul>
+
+<p>部屋マスタ</p>
+
+<ul>
+<li>部屋ID(Primary Key)</li>
+<li>スタジオID（Foreign Key)</li>
+<li>部屋名</li>
+</ul>
+
+<p>利用可能スタジオ</p>
+
+<ul>
+<li>部屋ID(Foreign Key)</li>
+<li>利用可能時間From（datetime型）</li>
+<li>利用可能時間To（datetime型）</li>
+</ul>
+
+<p>他にも実装上必要なカラムがいくつかあるかと思いますが、根幹はこんなもんかと。
+利用可能時間は、システム的には</p>
+
+<pre><code class="language-sql">select
+*
+from
+book_studio
+where
+time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
+</code></pre>
+
+<p>みたいに検索かけると思うので、datetimeに設定します。</p>
+
+<h3 id="画面設計">画面設計</h3>
+
+<p>1画面で、単純に検索 + 明細でいきます。
+仕事でやったシステムで実装が簡単だったから、djangoでも行けるはず（と信じたい）
+検索項目は、下記があれば十分かな？</p>
+
+<ul>
+<li>スタジオ名</li>
+<li>練習時刻From</li>
+<li>練習時刻To</li>
+<li>練習時間</li>
+</ul>
+
+<p>明細の項目は下記で必要最低限の情報は揃うはず。</p>
+
+<ul>
+<li>部屋名</li>
+<li>スタジオ名</li>
+<li>予約可能時間範囲</li>
+</ul>
+
+<h2 id="次回は">次回は</h2>
+
+<p>スクレイピング設計&amp;実装について書いていきたいと思います。</p>
               
             </div>
           </div>
@@ -265,7 +447,7 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">タグ</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://ginyolith.github.io/blog//tags/social/">social</a>
+  <a class="tag tag--primary tag--small" href="https://ginyolith.github.io/blog//tags/%E3%81%8A%E3%81%A8%E3%81%AA%E3%81%B3book%E9%96%8B%E7%99%BA/">おとなびBOOK開発</a>
 
                   </div>
                 
@@ -277,7 +459,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる①　構想編">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">次</span>
@@ -285,7 +467,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2014/08/hidden-tag-section-showcase/" data-tooltip="Hidden tag section showcase">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる①　構想編">
               
                 <span class="hide-xs hide-sm text-small icon-mr">前</span>
                 <i class="fa fa-angle-right"></i>
@@ -294,6 +476,31 @@
         </ul>
       </nav>
     <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
       
       
         <li class="post-action">
@@ -336,7 +543,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる①　構想編">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">次</span>
@@ -344,7 +551,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2014/08/hidden-tag-section-showcase/" data-tooltip="Hidden tag section showcase">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/" data-tooltip="アカペラ用の空きスタジオ検索システムを構築してみる①　構想編">
               
                 <span class="hide-xs hide-sm text-small icon-mr">前</span>
                 <i class="fa fa-angle-right"></i>
@@ -353,6 +560,31 @@
         </ul>
       </nav>
     <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
       
       
         <li class="post-action">
@@ -378,19 +610,19 @@
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fginyolith.github.io%2Fblog%2F2014%2F08%2Fhidden-social-section-showcase%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fginyolith.github.io%2Fblog%2F2017%2F09%2F%25E3%2582%25A2%25E3%2582%25AB%25E3%2583%259A%25E3%2583%25A9%25E7%2594%25A8%25E3%2581%25AE%25E7%25A9%25BA%25E3%2581%258D%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B8%25E3%2582%25AA%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E8%25A6%2581%25E4%25BB%25B6%25E8%25A9%25B0%25E3%2582%2581%25E3%2581%25A8%25E8%25A8%25AD%25E8%25A8%2588%25E7%25B7%25A8%2F">
           <i class="fa fa-facebook-official"></i><span>Facebookで共有</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fginyolith.github.io%2Fblog%2F2014%2F08%2Fhidden-social-section-showcase%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fginyolith.github.io%2Fblog%2F2017%2F09%2F%25E3%2582%25A2%25E3%2582%25AB%25E3%2583%259A%25E3%2583%25A9%25E7%2594%25A8%25E3%2581%25AE%25E7%25A9%25BA%25E3%2581%258D%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B8%25E3%2582%25AA%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E8%25A6%2581%25E4%25BB%25B6%25E8%25A9%25B0%25E3%2582%2581%25E3%2581%25A8%25E8%25A8%25AD%25E8%25A8%2588%25E7%25B7%25A8%2F">
           <i class="fa fa-twitter"></i><span>Twitterで共有</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fginyolith.github.io%2Fblog%2F2014%2F08%2Fhidden-social-section-showcase%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fginyolith.github.io%2Fblog%2F2017%2F09%2F%25E3%2582%25A2%25E3%2582%25AB%25E3%2583%259A%25E3%2583%25A9%25E7%2594%25A8%25E3%2581%25AE%25E7%25A9%25BA%25E3%2581%258D%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B8%25E3%2582%25AA%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E8%25A6%2581%25E4%25BB%25B6%25E8%25A9%25B0%25E3%2582%2581%25E3%2581%25A8%25E8%25A8%25AD%25E8%25A8%2588%25E7%25B7%25A8%2F">
           <i class="fa fa-google-plus"></i><span>Google&#43;で共有</span>
         </a>
       </li>
@@ -451,8 +683,8 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/">
-                <h3 class="media-heading">アカペラ用の空きスタジオ検索システムを構築してみる①　構想編</h3>
+              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8/">
+                <h3 class="media-heading">アカペラ用の空きスタジオ検索システムを構築してみる②　要件詰めと設計編</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -477,60 +709,6 @@
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/hidden-social-section-showcase/">
-                <h3 class="media-heading">Hidden social section showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the social section is hidden.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/hidden-tag-section-showcase/">
-                <h3 class="media-heading">Hidden tag section showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the tag section is hidden.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/hidden-pagination-showcase/">
-                <h3 class="media-heading">Hidden pagination showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the pagination is hidden.
-</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -560,7 +738,7 @@
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         6 posts found
+         3 posts found
       </p>
     </div>
   </div>
@@ -598,9 +776,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/ginyolith.github.io\/blog\/2014\/08\/hidden-social-section-showcase\/';
+          this.page.url = 'https:\/\/ginyolith.github.io\/blog\/2017\/09\/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8\/';
           
-            this.page.identifier = '\/2014\/08\/hidden-social-section-showcase\/'
+            this.page.identifier = '\/2017\/09\/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E8%A6%81%E4%BB%B6%E8%A9%B0%E3%82%81%E3%81%A8%E8%A8%AD%E8%A8%88%E7%B7%A8\/'
           
         };
         (function() {
