@@ -314,17 +314,58 @@
 
 <h3 id="技術選定">技術選定</h3>
 
-<p>ひとまず、手軽にリリースしたい + djangoの勉強をしたかったので、下記のようなウルトラシンプル構成にしました。
-| 項目 | 内容 |
-| &mdash; | &mdash;- |
-| フロント周り　| bootstrap4 |
-| アプリ | django |
-| スクレイピング | BeautifulSoup4, scrapelib (pythonのライブラリ) |
-| DB | sqlite3 |
-| webサーバー | nginx |
-| 環境 | amazon lightsail (nginx) |
-| エディタ | PyCharm |
-| ソースコード管理 | bitbucket |</p>
+<p>ひとまず、手軽にリリースしたい + djangoの勉強をしたかったので、下記のようなウルトラシンプル構成にしました。</p>
+
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>フロント周り　</td>
+<td>bootstrap4</td>
+</tr>
+
+<tr>
+<td>アプリ</td>
+<td>django</td>
+</tr>
+
+<tr>
+<td>スクレイピング</td>
+<td>BeautifulSoup4, scrapelib (pythonのライブラリ)</td>
+</tr>
+
+<tr>
+<td>DB</td>
+<td>sqlite3</td>
+</tr>
+
+<tr>
+<td>webサーバー</td>
+<td>nginx</td>
+</tr>
+
+<tr>
+<td>環境</td>
+<td>amazon lightsail (nginx)</td>
+</tr>
+
+<tr>
+<td>エディタ</td>
+<td>PyCharm</td>
+</tr>
+
+<tr>
+<td>ソースコード管理</td>
+<td>bitbucket</td>
+</tr>
+</tbody>
+</table>
 
 <p>環境はheroku使えばいいやんとか色々あると思いますが、このブログもlightsailで立ち上げたのでひとまず慣れてるほうを取りました。
 ソースコードはgithubで公開してポートフォリオ化したいなとも考えたのですが、一応本番運用する予定のサービスのため、セキュリティ関連で考える事が増えてしまってリリースが遅れてしまうことを懸念したため、プライベートリポジトリを持てるbitbucketを選定しました。
