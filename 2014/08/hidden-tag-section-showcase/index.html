@@ -497,43 +497,174 @@
                   Sep 9, 2017
                 </span>
               </span>
+              <div class="media-content hide-xs font-merryweather"><h2 id="目次">目次</h2>
+
+<ol>
+<li>要件詰め</li>
+<li>設計</li>
+</ol>
+
+<h2 id="要件詰め">要件詰め</h2>
+
+<p>前回の構想だと、ユースケースの想定が足りなかったので、追加で考えてみました。</p>
+
+<h3 id="ユースケース">ユースケース</h3>
+
+<ol>
+<li>○月✗日の13:00 ~ 16:00の間でスタジオ空いてないかな？</li>
+<li>出来るだけ安いスタジオが良い！</li>
+<li>ダンススタジオとアカペラスタジオ一括で空きスタジオを検索したい。</li>
+<li>12:00 ~ 17:00の間で3時間やりたい</li>
+</ol>
+
+<p>2はスタジオのマスターに情報を追加すればOKそう。
+3は検索対象のスタジオ増やすだけでOK</p>
+
+<p>苦戦しそうなのは、1と4ですね。必須要件ではありますが、こういう予約ってどういう設計すればいいのかよくわからない…。</p>
+
+<h2 id="要件">要件</h2>
+
+<p>上記をもとに、下記を要件として設定しました。
+* web上から日付・時間範囲で、開いているスタジオを検索出来る。
+* 例えば、13:00 ~ 16:00で練習がしたくて、スタジオの空きが下記表のような形の場合、13:00 ~ 16:00で部屋を使えるBのみが検索にHITする。</p>
+
+<table>
+<thead>
+<tr>
+<th>部屋名</th>
+<th>時間</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>A</td>
+<td>10:00 ~ 15:00</td>
+</tr>
+
+<tr>
+<td>B</td>
+<td>12:00 ~ 17:00</td>
+</tr>
+
+<tr>
+<td>C</td>
+<td>15:00 ~ 17:00</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>第一フェーズはアカペラスタジオBassOnTop高田馬場店と、同店ダンススタジオを検索対象とする。</li>
+<li>範囲の追加はリリースしてからいくらでも出来ると思うので。</li>
+<li>レスポンシブデザイン</li>
+<li>検索にヒットした明細をクリックすると、そのスタジオの予約画面へと繊維する</li>
+<li>予約情報のオートフィルなどのサポートはスコープ外とする</li>
+</ul>
+
+<h2 id="設計">設計</h2>
+
+<h3 id="技術選定">技術選定</h3>
+
+<p>ひとまず、手軽にリリースしたい + djangoの勉強をしたかったので、下記のようなウルトラシンプル構成にしました。
+| 項目 | 内容 |
+| &mdash; | &mdash;- |
+| フロント周り　| bootstrap4 |
+| アプリ | django |
+| スクレイピング | BeautifulSoup4, scrapelib (pythonのライブラリ) |
+| DB | sqlite3 |
+| webサーバー | nginx |
+| 環境 | amazon lightsail (nginx) |
+| エディタ | PyCharm |
+| ソースコード管理 | bitbucket |</p>
+
+<p>環境はheroku使えばいいやんとか色々あると思いますが、このブログもlightsailで立ち上げたのでひとまず慣れてるほうを取りました。
+ソースコードはgithubで公開してポートフォリオ化したいなとも考えたのですが、一応本番運用する予定のサービスのため、セキュリティ関連で考える事が増えてしまってリリースが遅れてしまうことを懸念したため、プライベートリポジトリを持てるbitbucketを選定しました。
+スクレイピングで空きスタジオ情報をWebで公開しているページから、情報を取得する形になりそうです。
+バッチを作ったらcronで回せばいいかなと。</p>
+
+<h3 id="db設計">DB設計</h3>
+
+<p>ざっくりこんな感じの設計に
+スタジオマスタ</p>
+
+<ul>
+<li>スタジオID(Primary Key)</li>
+<li>スタジオ名</li>
+<li>url</li>
+</ul>
+
+<p>部屋マスタ</p>
+
+<ul>
+<li>部屋ID(Primary Key)</li>
+<li>スタジオID（Foreign Key)</li>
+<li>部屋名</li>
+</ul>
+
+<p>利用可能スタジオ</p>
+
+<ul>
+<li>部屋ID(Foreign Key)</li>
+<li>利用可能時間From（datetime型）</li>
+<li>利用可能時間To（datetime型）</li>
+</ul>
+
+<p>他にも実装上必要なカラムがいくつかあるかと思いますが、根幹はこんなもんかと。
+利用可能時間は、システム的には</p>
+
+<pre><code class="language-sql">select
+*
+from
+book_studio
+where
+time_from &lt;= 2017/09/10 13:00 and time_to &gt;= 2017/09/10 16:00
+</code></pre>
+
+<p>みたいに検索かけると思うので、datetimeに設定します。</p>
+
+<h3 id="画面設計">画面設計</h3>
+
+<p>1画面で、単純に検索 + 明細でいきます。
+仕事でやったシステムで実装が簡単だったから、djangoでも行けるはず（と信じたい）
+検索項目は、下記があれば十分かな？</p>
+
+<ul>
+<li>スタジオ名</li>
+<li>練習時刻From</li>
+<li>練習時刻To</li>
+<li>練習時間</li>
+</ul>
+
+<p>明細の項目は下記で必要最低限の情報は揃うはず。</p>
+
+<ul>
+<li>部屋名</li>
+<li>スタジオ名</li>
+<li>予約可能時間範囲</li>
+</ul>
+
+<h2 id="次回は">次回は</h2>
+
+<p>スクレイピング設計&amp;実装について書いていきたいと思います。
+</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/">
+                <h3 class="media-heading">アカペラ用の空きスタジオ検索システムを構築してみる①　構想編</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
               <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2015/06/welcome-to-tranquilpeak-0.4.1-beta/">
-                <h3 class="media-heading">Welcome to Tranquilpeak 0.4.1-BETA</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2015
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak is a gorgeous responsive theme for Hugo blog framework. It has many features and integrated services to improve user experience.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2015/05/elements-showcase/">
-                <h3 class="media-heading">Elements showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2015
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&rsquo;s simple and elegant.
-</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -551,42 +682,6 @@
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak integrate a unique &ldquo;cover image&rdquo; feature. Open this post to see how this feature sublimate your article.</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2015/03/highlighted-code-showcase/">
-                <h3 class="media-heading">highlighted code showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2015
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak Hugo theme have its own theme to highlight source code. It&rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/10/tags-plugins-showcase/">
-                <h3 class="media-heading">Tags plugins showcase</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2014
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how tag plugins are displayed. See <a href="https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md#tags">docs</a> for more info.
-</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -649,16 +744,15 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://ginyolith.github.io/blog/2014/08/video-integrations-showcase/">
-                <h3 class="media-heading">Video integrations showcase</h3>
+              <a class="link-unstyled" href="https://ginyolith.github.io/blog/post/">
+                <h3 class="media-heading">Posts</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Aug 8, 2014
+                  Sep 9, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>Youtube and Vimeo videos are easily integrated thanks to tags plugins. Of course, you can add video other platforms like dailymotion.
-</p></div>
+              <div class="media-content hide-xs font-merryweather"></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -671,7 +765,7 @@
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         14 posts found
+         7 posts found
       </p>
     </div>
   </div>

@@ -4,32 +4,17 @@
   
   <url>
     <loc>https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/</loc>
+    <lastmod>2017-09-13T02:05:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/</loc>
     <lastmod>2017-09-13T01:45:15+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2015/06/welcome-to-tranquilpeak-0.4.1-beta/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2015/05/elements-showcase/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://ginyolith.github.io/blog/2015/05/cover-image-showcase/</loc>
     <lastmod>2015-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2015/03/highlighted-code-showcase/</loc>
-    <lastmod>2015-03-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2014/10/tags-plugins-showcase/</loc>
-    <lastmod>2014-10-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -48,26 +33,6 @@
   </url>
   
   <url>
-    <loc>https://ginyolith.github.io/blog/2014/08/video-integrations-showcase/</loc>
-    <lastmod>2014-08-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2013/10/chinese-test/</loc>
-    <lastmod>2013-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2013/02/image-gallery-showcase/</loc>
-    <lastmod>2013-02-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/2013/01/japanese-test/</loc>
-    <lastmod>2013-01-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ginyolith.github.io/blog/archives/</loc>
     <priority>0</priority>
   </url>
@@ -78,86 +43,14 @@
   </url>
   
   <url>
-    <loc>https://ginyolith.github.io/blog/tags/chinese/</loc>
-    <lastmod>2013-10-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://ginyolith.github.io/blog/tags/cover-image/</loc>
     <lastmod>2015-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://ginyolith.github.io/blog/tags/dailymotion/</loc>
-    <lastmod>2014-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/disqus/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://ginyolith.github.io/blog/categories/features/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/github-theme/</loc>
-    <lastmod>2015-03-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/google-analytics/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/gravatar/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/hexo-theme/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/highlight-code/</loc>
-    <lastmod>2015-03-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/html-elements/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/image-gallery/</loc>
-    <lastmod>2013-02-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/japanese/</loc>
-    <lastmod>2013-01-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/markdown/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2015-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -169,19 +62,7 @@
   
   <url>
     <loc>https://ginyolith.github.io/blog/post/</loc>
-    <lastmod>2017-09-13T01:45:15+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/categories/releases/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/responsive/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-13T02:05:39+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -192,14 +73,8 @@
   </url>
   
   <url>
-    <loc>https://ginyolith.github.io/blog/tags/tag-plugins/</loc>
-    <lastmod>2014-10-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://ginyolith.github.io/blog/tags/</loc>
-    <lastmod>2013-10-02T00:00:00+00:00</lastmod>
+    <lastmod>2015-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -211,49 +86,25 @@
   
   <url>
     <loc>https://ginyolith.github.io/blog/categories/tech/</loc>
-    <lastmod>2017-09-13T01:45:15+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/test/</loc>
-    <lastmod>2015-03-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-13T02:05:39+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ginyolith.github.io/blog/categories/tranquilpeak/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/videos-integration/</loc>
-    <lastmod>2014-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/vimeo/</loc>
-    <lastmod>2014-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ginyolith.github.io/blog/tags/youtube/</loc>
-    <lastmod>2014-08-09T00:00:00+00:00</lastmod>
+    <lastmod>2015-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ginyolith.github.io/blog/tags/%E3%81%8A%E3%81%A8%E3%81%AA%E3%81%B3book%E9%96%8B%E7%99%BA/</loc>
-    <lastmod>2017-09-13T01:45:15+09:00</lastmod>
+    <lastmod>2017-09-13T02:05:39+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ginyolith.github.io/blog/</loc>
-    <lastmod>2017-09-13T01:45:15+09:00</lastmod>
+    <lastmod>2017-09-13T02:05:39+09:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,10 +6,169 @@
     <description>Recent content in Posts on ぎにょろぐ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 13 Sep 2017 01:45:15 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 13 Sep 2017 02:05:39 +0900</lastBuildDate>
     
 	<atom:link href="https://ginyolith.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>アカペラ用の空きスタジオ検索システムを構築してみる①　構想編</title>
+      <link>https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/</link>
+      <pubDate>Wed, 13 Sep 2017 02:05:39 +0900</pubDate>
+      
+      <guid>https://ginyolith.github.io/blog/2017/09/%E3%82%A2%E3%82%AB%E3%83%9A%E3%83%A9%E7%94%A8%E3%81%AE%E7%A9%BA%E3%81%8D%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E6%A4%9C%E7%B4%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B%E6%A7%8B%E6%83%B3%E7%B7%A8/</guid>
+      <description>&lt;h2 id=&#34;目次&#34;&gt;目次&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;要件詰め&lt;/li&gt;
+&lt;li&gt;設計&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;要件詰め&#34;&gt;要件詰め&lt;/h2&gt;
+
+&lt;p&gt;前回の構想だと、ユースケースの想定が足りなかったので、追加で考えてみました。&lt;/p&gt;
+
+&lt;h3 id=&#34;ユースケース&#34;&gt;ユースケース&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;○月✗日の13:00 ~ 16:00の間でスタジオ空いてないかな？&lt;/li&gt;
+&lt;li&gt;出来るだけ安いスタジオが良い！&lt;/li&gt;
+&lt;li&gt;ダンススタジオとアカペラスタジオ一括で空きスタジオを検索したい。&lt;/li&gt;
+&lt;li&gt;12:00 ~ 17:00の間で3時間やりたい&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;2はスタジオのマスターに情報を追加すればOKそう。
+3は検索対象のスタジオ増やすだけでOK&lt;/p&gt;
+
+&lt;p&gt;苦戦しそうなのは、1と4ですね。必須要件ではありますが、こういう予約ってどういう設計すればいいのかよくわからない…。&lt;/p&gt;
+
+&lt;h2 id=&#34;要件&#34;&gt;要件&lt;/h2&gt;
+
+&lt;p&gt;上記をもとに、下記を要件として設定しました。
+* web上から日付・時間範囲で、開いているスタジオを検索出来る。
+* 例えば、13:00 ~ 16:00で練習がしたくて、スタジオの空きが下記表のような形の場合、13:00 ~ 16:00で部屋を使えるBのみが検索にHITする。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;部屋名&lt;/th&gt;
+&lt;th&gt;時間&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;10:00 ~ 15:00&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;B&lt;/td&gt;
+&lt;td&gt;12:00 ~ 17:00&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;C&lt;/td&gt;
+&lt;td&gt;15:00 ~ 17:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;第一フェーズはアカペラスタジオBassOnTop高田馬場店と、同店ダンススタジオを検索対象とする。&lt;/li&gt;
+&lt;li&gt;範囲の追加はリリースしてからいくらでも出来ると思うので。&lt;/li&gt;
+&lt;li&gt;レスポンシブデザイン&lt;/li&gt;
+&lt;li&gt;検索にヒットした明細をクリックすると、そのスタジオの予約画面へと繊維する&lt;/li&gt;
+&lt;li&gt;予約情報のオートフィルなどのサポートはスコープ外とする&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;設計&#34;&gt;設計&lt;/h2&gt;
+
+&lt;h3 id=&#34;技術選定&#34;&gt;技術選定&lt;/h3&gt;
+
+&lt;p&gt;ひとまず、手軽にリリースしたい + djangoの勉強をしたかったので、下記のようなウルトラシンプル構成にしました。
+| 項目 | 内容 |
+| &amp;mdash; | &amp;mdash;- |
+| フロント周り　| bootstrap4 |
+| アプリ | django |
+| スクレイピング | BeautifulSoup4, scrapelib (pythonのライブラリ) |
+| DB | sqlite3 |
+| webサーバー | nginx |
+| 環境 | amazon lightsail (nginx) |
+| エディタ | PyCharm |
+| ソースコード管理 | bitbucket |&lt;/p&gt;
+
+&lt;p&gt;環境はheroku使えばいいやんとか色々あると思いますが、このブログもlightsailで立ち上げたのでひとまず慣れてるほうを取りました。
+ソースコードはgithubで公開してポートフォリオ化したいなとも考えたのですが、一応本番運用する予定のサービスのため、セキュリティ関連で考える事が増えてしまってリリースが遅れてしまうことを懸念したため、プライベートリポジトリを持てるbitbucketを選定しました。
+スクレイピングで空きスタジオ情報をWebで公開しているページから、情報を取得する形になりそうです。
+バッチを作ったらcronで回せばいいかなと。&lt;/p&gt;
+
+&lt;h3 id=&#34;db設計&#34;&gt;DB設計&lt;/h3&gt;
+
+&lt;p&gt;ざっくりこんな感じの設計に
+スタジオマスタ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スタジオID(Primary Key)&lt;/li&gt;
+&lt;li&gt;スタジオ名&lt;/li&gt;
+&lt;li&gt;url&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;部屋マスタ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;部屋ID(Primary Key)&lt;/li&gt;
+&lt;li&gt;スタジオID（Foreign Key)&lt;/li&gt;
+&lt;li&gt;部屋名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;利用可能スタジオ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;部屋ID(Foreign Key)&lt;/li&gt;
+&lt;li&gt;利用可能時間From（datetime型）&lt;/li&gt;
+&lt;li&gt;利用可能時間To（datetime型）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;他にも実装上必要なカラムがいくつかあるかと思いますが、根幹はこんなもんかと。
+利用可能時間は、システム的には&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;select
+*
+from
+book_studio
+where
+time_from &amp;lt;= 2017/09/10 13:00 and time_to &amp;gt;= 2017/09/10 16:00
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;みたいに検索かけると思うので、datetimeに設定します。&lt;/p&gt;
+
+&lt;h3 id=&#34;画面設計&#34;&gt;画面設計&lt;/h3&gt;
+
+&lt;p&gt;1画面で、単純に検索 + 明細でいきます。
+仕事でやったシステムで実装が簡単だったから、djangoでも行けるはず（と信じたい）
+検索項目は、下記があれば十分かな？&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スタジオ名&lt;/li&gt;
+&lt;li&gt;練習時刻From&lt;/li&gt;
+&lt;li&gt;練習時刻To&lt;/li&gt;
+&lt;li&gt;練習時間&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;明細の項目は下記で必要最低限の情報は揃うはず。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;部屋名&lt;/li&gt;
+&lt;li&gt;スタジオ名&lt;/li&gt;
+&lt;li&gt;予約可能時間範囲&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;次回は&#34;&gt;次回は&lt;/h2&gt;
+
+&lt;p&gt;スクレイピング設計&amp;amp;実装について書いていきたいと思います。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>アカペラ用の空きスタジオ検索システムを構築してみる①　構想編</title>
@@ -21,52 +180,12 @@
     </item>
     
     <item>
-      <title>Welcome to Tranquilpeak 0.4.1-BETA</title>
-      <link>https://ginyolith.github.io/blog/2015/06/welcome-to-tranquilpeak-0.4.1-beta/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2015/06/welcome-to-tranquilpeak-0.4.1-beta/</guid>
-      <description>&lt;p&gt;Tranquilpeak is a gorgeous responsive theme for Hugo blog framework. It has many features and integrated services to improve user experience.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Elements showcase</title>
-      <link>https://ginyolith.github.io/blog/2015/05/elements-showcase/</link>
-      <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2015/05/elements-showcase/</guid>
-      <description>&lt;p&gt;Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&amp;rsquo;s simple and elegant.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Cover image showcase</title>
       <link>https://ginyolith.github.io/blog/2015/05/cover-image-showcase/</link>
       <pubDate>Wed, 13 May 2015 00:00:00 +0000</pubDate>
       
       <guid>https://ginyolith.github.io/blog/2015/05/cover-image-showcase/</guid>
       <description>&lt;p&gt;Tranquilpeak integrate a unique &amp;ldquo;cover image&amp;rdquo; feature. Open this post to see how this feature sublimate your article.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>highlighted code showcase</title>
-      <link>https://ginyolith.github.io/blog/2015/03/highlighted-code-showcase/</link>
-      <pubDate>Mon, 23 Mar 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2015/03/highlighted-code-showcase/</guid>
-      <description>&lt;p&gt;Tranquilpeak Hugo theme have its own theme to highlight source code. It&amp;rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Tags plugins showcase</title>
-      <link>https://ginyolith.github.io/blog/2014/10/tags-plugins-showcase/</link>
-      <pubDate>Wed, 29 Oct 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2014/10/tags-plugins-showcase/</guid>
-      <description>&lt;p&gt;This post is used to show how tag plugins are displayed. See &lt;a href=&#34;https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md#tags&#34;&gt;docs&lt;/a&gt; for more info.
-&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -96,46 +215,6 @@
       
       <guid>https://ginyolith.github.io/blog/2014/08/hidden-pagination-showcase/</guid>
       <description>&lt;p&gt;This post is used to show how a site looks if the pagination is hidden.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Video integrations showcase</title>
-      <link>https://ginyolith.github.io/blog/2014/08/video-integrations-showcase/</link>
-      <pubDate>Sat, 09 Aug 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2014/08/video-integrations-showcase/</guid>
-      <description>&lt;p&gt;Youtube and Vimeo videos are easily integrated thanks to tags plugins. Of course, you can add video other platforms like dailymotion.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>中文測試</title>
-      <link>https://ginyolith.github.io/blog/2013/10/chinese-test/</link>
-      <pubDate>Wed, 02 Oct 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2013/10/chinese-test/</guid>
-      <description>&lt;p&gt;This is a chinese test post to show you how chinese is displayed.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Image gallery showcase</title>
-      <link>https://ginyolith.github.io/blog/2013/02/image-gallery-showcase/</link>
-      <pubDate>Mon, 18 Feb 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2013/02/image-gallery-showcase/</guid>
-      <description>&lt;p&gt;And here is the image gallery!
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>日本語テスト</title>
-      <link>https://ginyolith.github.io/blog/2013/01/japanese-test/</link>
-      <pubDate>Wed, 02 Jan 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/2013/01/japanese-test/</guid>
-      <description>&lt;p&gt;This is a Japanese test post to show you how japanese is displayed.
 &lt;/p&gt;</description>
     </item>
     
