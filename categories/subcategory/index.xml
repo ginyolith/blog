@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Subcategory on ぎにょろぐ</title>
-    <link>https://ginyolith.github.io/ginyolith/categories/subcategory/</link>
+    <link>https://ginyolith.github.io/blog/categories/subcategory/</link>
     <description>Recent content in Subcategory on ぎにょろぐ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 13 Sep 2017 01:07:50 +0900</lastBuildDate>
     
-	<atom:link href="https://ginyolith.github.io/ginyolith/categories/subcategory/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ginyolith.github.io/blog/categories/subcategory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>テスト2</title>
-      <link>https://ginyolith.github.io/ginyolith/2017/09/%E3%83%86%E3%82%B9%E3%83%882/</link>
+      <link>https://ginyolith.github.io/blog/2017/09/%E3%83%86%E3%82%B9%E3%83%882/</link>
       <pubDate>Wed, 13 Sep 2017 01:07:50 +0900</pubDate>
       
-      <guid>https://ginyolith.github.io/ginyolith/2017/09/%E3%83%86%E3%82%B9%E3%83%882/</guid>
+      <guid>https://ginyolith.github.io/blog/2017/09/%E3%83%86%E3%82%B9%E3%83%882/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
