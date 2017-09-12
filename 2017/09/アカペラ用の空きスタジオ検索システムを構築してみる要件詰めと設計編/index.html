@@ -174,16 +174,6 @@
     </a>
   </li>
 
-  <li class="sidebar-button">
-    
-      <a class="sidebar-button-link " href="https://stackoverflow.com/users/636472/kakawait" target="_blank" rel="noopener">
-    
-      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
-      
-      <span class="sidebar-button-desc">Stack Overflow</span>
-    </a>
-  </li>
-
 
     </ul>
     <ul class="sidebar-buttons">
@@ -272,9 +262,12 @@
 
 <h2 id="要件">要件</h2>
 
-<p>上記をもとに、下記を要件として設定しました。
-* web上から日付・時間範囲で、開いているスタジオを検索出来る。
-* 例えば、13:00 ~ 16:00で練習がしたくて、スタジオの空きが下記表のような形の場合、13:00 ~ 16:00で部屋を使えるBのみが検索にHITする。</p>
+<p>上記をもとに、下記を要件として設定しました。</p>
+
+<ul>
+<li>web上から日付・時間範囲で、開いているスタジオを検索出来る。</li>
+<li>例えば、13:00 ~ 16:00で練習がしたくて、スタジオの空きが下記表のような形の場合、13:00 ~ 16:00で部屋を使えるBのみが検索にHITする。</li>
+</ul>
 
 <table>
 <thead>
@@ -374,14 +367,12 @@
 
 <h3 id="db設計">DB設計</h3>
 
-<p>ざっくりこんな感じの設計に
-スタジオマスタ</p>
+<p>ざっくりこんな感じの設計に</p>
 
-<ul>
-<li>スタジオID(Primary Key)</li>
-<li>スタジオ名</li>
-<li>url</li>
-</ul>
+<p>スタジオマスタ
+* スタジオID(Primary Key)
+* スタジオ名
+* url</p>
 
 <p>部屋マスタ</p>
 
