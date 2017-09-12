@@ -165,24 +165,6 @@
     </item>
     
     <item>
-      <title>Tag1</title>
-      <link>https://ginyolith.github.io/blog/tags/tag1/</link>
-      <pubDate>Wed, 13 Sep 2017 01:07:50 +0900</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/tags/tag1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tag2</title>
-      <link>https://ginyolith.github.io/blog/tags/tag2/</link>
-      <pubDate>Wed, 13 Sep 2017 01:07:50 +0900</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/tags/tag2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Tags</title>
       <link>https://ginyolith.github.io/blog/tags/tags/</link>
       <pubDate>Sat, 16 Aug 2014 00:00:00 +0000</pubDate>
@@ -224,6 +206,15 @@
       <pubDate>Sat, 09 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>https://ginyolith.github.io/blog/tags/youtube/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>おとなびbook開発</title>
+      <link>https://ginyolith.github.io/blog/tags/%E3%81%8A%E3%81%A8%E3%81%AA%E3%81%B3book%E9%96%8B%E7%99%BA/</link>
+      <pubDate>Wed, 13 Sep 2017 01:45:15 +0900</pubDate>
+      
+      <guid>https://ginyolith.github.io/blog/tags/%E3%81%8A%E3%81%A8%E3%81%AA%E3%81%B3book%E9%96%8B%E7%99%BA/</guid>
       <description></description>
     </item>
     

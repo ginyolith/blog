@@ -11,15 +11,6 @@
     
     
     <item>
-      <title>Category</title>
-      <link>https://ginyolith.github.io/blog/categories/category/</link>
-      <pubDate>Wed, 13 Sep 2017 01:07:50 +0900</pubDate>
-      
-      <guid>https://ginyolith.github.io/blog/categories/category/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Features</title>
       <link>https://ginyolith.github.io/blog/categories/features/</link>
       <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
@@ -38,11 +29,11 @@
     </item>
     
     <item>
-      <title>Subcategory</title>
-      <link>https://ginyolith.github.io/blog/categories/subcategory/</link>
-      <pubDate>Wed, 13 Sep 2017 01:07:50 +0900</pubDate>
+      <title>Tech</title>
+      <link>https://ginyolith.github.io/blog/categories/tech/</link>
+      <pubDate>Wed, 13 Sep 2017 01:45:15 +0900</pubDate>
       
-      <guid>https://ginyolith.github.io/blog/categories/subcategory/</guid>
+      <guid>https://ginyolith.github.io/blog/categories/tech/</guid>
       <description></description>
     </item>
     
